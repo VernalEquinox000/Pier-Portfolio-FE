@@ -80,7 +80,7 @@ export default function Home() {
         {pier && (
           <Col
             className="d-flex-column justify-content-start"
-            sm={{ offset: 2, span: 8 }}
+            sm={{ offset: 2, span: 7 }}
             style={{ border: "1px solid black", textAlign: "left" }}
           >
             {"{"}
