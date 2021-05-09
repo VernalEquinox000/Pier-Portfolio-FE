@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Pier from "../assets/pier1.jpeg";
-//import Post from "../assets/pierman.png";
+import Post from "../assets/pierman.png";
 import { getPier } from "../api/api";
 
 export default function Home() {
@@ -38,12 +38,36 @@ export default function Home() {
           <Form.Group>
             <div className="d-flex mt-3 mb-5 animate__animated animate__slideInLeft">
               <Form.Control
-                placeholder="/about/Pierdomenico"
+                as="select"
+                size="lg"
+                style={{ width: "150px" }}
+                custom
+              >
+                <option>GET</option>
+                <option>POST</option>
+              </Form.Control>
+              <Form.Control
+                as="select"
+                size="lg"
+                style={{ width: "450px" }}
+                custom
+              >
+                <option>/about/Pierdomenico</option>
+                <option>/projects/Pierdomenico</option>
+                <option>/contact/Pierdomenico</option>
+              </Form.Control>
+              <Button className="ml-2" disabled variant="success">
+                Send
+              </Button>
+              <img src={Post} style={{ width: "50px" }} alt="post" />
+              {/* <Form.Control
+                placeholder="pier-portofolio.vercel.app/about/Pierdomenico"
                 disabled
+                size="lg"
                 style={{
                   cursor: "pointer",
                   border: "2px solid black",
-                  width: "100%",
+                  width: "fit-content",
                 }}
                 //onClick={()=>setValue("")}
               />
@@ -75,7 +99,7 @@ export default function Home() {
               />
               <Button className="ml-2" disabled variant="danger">
                 POST
-              </Button>
+              </Button> */}
             </div>
           </Form.Group>
         </Col>
