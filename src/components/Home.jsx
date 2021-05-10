@@ -5,8 +5,11 @@ import Post from "../assets/pierman.png";
 import { getPier } from "../api/api";
 
 export default function Home() {
-  // const [value, setValue] = useState("");
+  const [action, setAction] = useState("GET");
+  const [url, setUrl] = useState("/about/Pierdomenico");
   const [pier, setPier] = useState(null);
+  const [value, setValue] = useState(["GET", "POST"]);
+  const val = value.map((val) => val);
 
   const fetchPier = async () => {
     try {
@@ -18,6 +21,31 @@ export default function Home() {
       console.log(error);
     }
   };
+
+  const handleChange = (e) => {
+    console.clear();
+    console.log(value[e.target.value]);
+  };
+
+  /* const [addrtype, setAddrtype] = useState(["Work", "Home", "school"]);
+ const Add = addrtype.map((Add) => Add);
+ const handleAddrTypeChange = (e) => {
+   console.clear(), console.log(addrtype[e.target.value]);
+ };
+
+ return (
+   <select
+     onChange={(e) => handleAddrTypeChange(e)}
+     className="browser-default custom-select"
+   >
+     {Add.map((address, key) => (
+       <option key={key} value={key}>
+         {address}
+       </option>
+     ))}
+   </select>
+ ); */
+
   return (
     <Container className="mt-5">
       <Row>
@@ -41,10 +69,16 @@ export default function Home() {
                 as="select"
                 size="lg"
                 style={{ width: "150px" }}
-                custom
+                /* custom */
+                onChange={(e) => handleChange(e)}
               >
-                <option>GET</option>
-                <option>POST</option>
+                {val.map((nonso, key) => (
+                  <option key={key} value={key}>
+                    {nonso}
+                  </option>
+                ))}
+                {/* <option>GET</option>
+                  <option>POST</option> */}
               </Form.Control>
               <Form.Control
                 as="select"
@@ -56,11 +90,22 @@ export default function Home() {
                 <option>/projects/Pierdomenico</option>
                 <option>/contact/Pierdomenico</option>
               </Form.Control>
-              <Button className="ml-2" disabled variant="success">
+              <Button
+                className="ml-2"
+                disabled
+                variant="success"
+
+                /* onClick={() => {
+                    fetchPier();
+                  }} */
+              >
                 Send
               </Button>
               <img src={Post} style={{ width: "50px" }} alt="post" />
-              {/* <Form.Control
+            </div>
+          </Form.Group>
+          )
+          {/* <Form.Control
                 placeholder="pier-portofolio.vercel.app/about/Pierdomenico"
                 disabled
                 size="lg"
@@ -100,8 +145,6 @@ export default function Home() {
               <Button className="ml-2" disabled variant="danger">
                 POST
               </Button> */}
-            </div>
-          </Form.Group>
         </Col>
         {/* <Col sm={2}>
           <img src={Post} style={{ width: "200px" }} alt="post" />
