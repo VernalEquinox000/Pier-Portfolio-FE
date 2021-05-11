@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Dropdown,
+  DropdownButton,
+} from "react-bootstrap";
 import Pier from "../assets/pier1.jpeg";
 import Post from "../assets/pierman.png";
 import { getPier } from "../api/api";
@@ -8,9 +16,21 @@ export default function Home() {
   const [action, setAction] = useState("GET");
   const [url, setUrl] = useState("/about/Pierdomenico");
   const [pier, setPier] = useState(null);
-  const [value, setValue] = useState(["GET", "POST"]);
-  const val = value.map((val) => val);
+  const [value, setValue] = useState("");
 
+  let actions = ["GET", "POST"];
+  let urls = [
+    "/about/Pierdomenico",
+    "/projects/Pierdomenico",
+    "/contact/Pierdomenico",
+  ];
+
+  const handleActionChange = (action) => {
+    setAction(action);
+  };
+  const handleUrlChange = (url) => {
+    setUrl(url);
+  };
   const fetchPier = async () => {
     try {
       const response = await getPier();
@@ -20,11 +40,6 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleChange = (e) => {
-    console.clear();
-    console.log(value[e.target.value]);
   };
 
   /* const [addrtype, setAddrtype] = useState(["Work", "Home", "school"]);
@@ -70,16 +85,17 @@ export default function Home() {
                 size="lg"
                 style={{ width: "150px" }}
                 /* custom */
-                onChange={(e) => handleChange(e)}
               >
-                {val.map((nonso, key) => (
-                  <option key={key} value={key}>
-                    {nonso}
-                  </option>
-                ))}
-                {/* <option>GET</option>
-                  <option>POST</option> */}
+                {actions.map((action, index) => {
+                  <option
+                    key={index}
+                    onClick={() => handleActionChange(action)}
+                  ></option>;
+                })}
+                {/* <option eventKey="GET">GET</option>
+                <option eventKey="POST">POST</option> */}
               </Form.Control>
+              <p>you selected {value}</p>
               <Form.Control
                 as="select"
                 size="lg"
